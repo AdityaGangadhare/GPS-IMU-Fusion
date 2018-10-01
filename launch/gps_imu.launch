@@ -1,0 +1,18 @@
+ <launch> 
+        <node pkg="robot_localization" type="ekf_localization_node" name="ekf_1" clear_params="true">
+        <rosparam command="load" file="$(find robot_localization)/params/GPS_IMU.yaml" />
+         <!--  Placeholder for output topic remapping
+        <remap from="odometry/filtered" to=""/>
+        <remap from="accel/filtered" to=""/>
+        -->
+      </node>
+
+      <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform" clear_params="true">
+        <rosparam command="load" file="$(find robot_localization)/params/navsat_transform_GPS_IMU.yaml" />
+        <!-- Placeholders for input remapping. Set your topic names as the "to" values.
+        <remap from="odometry/filtered" to="odometry/filtered_map"/> -->
+        <remap from="imu/data" to="/imu/data"/>  
+        <remap from="gps/fix" to="/fix"/>              
+      </node>
+
+ </launch>
